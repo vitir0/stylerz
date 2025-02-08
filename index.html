@@ -1,0 +1,175 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stylerz site</title>
+</head>
+<style>
+    body, html {
+  height: 100%;
+  margin: 0;
+  background-color: black;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  height: 100%;
+  text-align: center;
+}
+
+.background-image {
+  width: auto;
+  height: 70%; /*  еще меньше */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  opacity: 0.35; /*  еще прозрачнее */
+}
+.text {
+text-align: center;
+}
+.coming-soon {
+  /*  Варианты красивых заглавных шрифтов: */
+  /*  1. Derkon (смелый и необычный) [1]*/
+  /*font-family: 'Derkon', sans-serif;*/
+
+  /*  2. TT Espina (чарующая дисплейная антиква) [2]*/
+  /*font-family: 'TT Espina', serif;*/
+
+  /*  3. Glamor (изысканный) [4]*/
+  /*font-family: 'Glamor', sans-serif;*/
+
+  /*  4. Monument Valley (современный сжатый) [4]*/
+  /*font-family: 'Monument Valley', sans-serif;*/
+
+  font-family: 'Derkon', sans-serif; /*  запасной вариант */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3em;
+  z-index: 1;
+  text-transform: uppercase; /*  только заглавные буквы */
+}
+.social-icons {
+  position: fixed; /* Фиксированное положение внизу */
+  bottom: 20px; /* Отступ от нижнего края */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 2; /* Чтобы иконки были поверх фона */
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 10px; /* Отступы между иконками */
+}
+
+.social-icons img {
+  width: 30px; /* Размер иконок */
+  height: 30px;
+  opacity: 0.7; /*  прозрачность иконок */
+  transition: opacity 0.3s ease; /*  эффект при наведении */
+}
+
+.social-icons img:hover {
+  opacity: 1; /*  прозрачность при наведении */
+}
+
+.social-icons .copyright {
+  color: white;
+  font-family: 'Your Preferred Font', sans-serif; /* Красивый шрифт для копирайта */
+  font-size: 0.8em;
+  display: block; /*  текст на новой строке */
+  margin-top: 5px; /*  отступ от иконок */
+}
+#playButton {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: transparent; /* Прозрачный фон */
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#playButton img {
+  width: 30px; /* Размер иконки */
+  height: 30px;
+}
+</style>
+<body>
+    <audio id="myAudio" src="Relaxsite.mp3" autoplay loop></audio>
+    <button id="playButton">
+    <img id="playPauseIcon" src="https://i.ibb.co/0VpzVB7R/google-play.png" alt="Play">
+   
+  </button>
+    <div class="container">
+        <a href="https://ibb.co/WWvsVysr"><img src="https://i.ibb.co/JRjC37CY/photo-5276214165058480886-y.jpg" alt="Coming Soon Image" class="background-image" border="0"></a>
+        <div class="coming-soon">Coming Soon...</div>
+    </div>  
+    <div class="social-icons">
+       <a href="https://ibb.co/hJCbMxNk"><img src="https://i.ibb.co/fzQfSVWb/White-Bandlab-Icon.jpg" alt="White-Bandlab-Icon" border="0"></a>
+        <a href="https://imgbb.com/"><img src="https://i.ibb.co/svKZL8Sm/telegram-1.png" alt="telegram-1" border="0"></a>
+        <a href="https://imgbb.com/"><img src="https://i.ibb.co/DgzFfRbJ/spotify.png" alt="spotify" border="0"></a>
+        <span class="copyright">&copy; 2025 Все права защищены</span>
+    </div>
+    <script>
+       var playButton = document.getElementById('playButton');
+var audio = document.getElementById('myAudio');
+var playPauseIcon = document.getElementById('playPauseIcon');
+var isPlaying = false; //  флаг для отслеживания состояния воспроизведения
+
+//  Функция для переключения иконки
+function togglePlayPauseIcon() {
+  if (isPlaying) {
+    playPauseIcon.src = 'https://i.ibb.co/KpFHpBRM/pause.png'; //  замените на путь к иконке паузы
+    playPauseIcon.alt = 'Pause';
+  } else {
+    playPauseIcon.src = 'https://i.ibb.co/NnTMCxKv/3d-video-play-button-isolated-on-transparent-background-file-format-png.png'; //  замените на путь к иконке плей
+    playPauseIcon.alt = 'Play';
+  }
+
+}
+
+//  Функция для запуска/остановки воспроизведения
+function togglePlayPause() {
+  if (audio.paused) {
+    audio.play().catch(function(error) {
+      console.log("Автовоспроизведение заблокировано:", error);
+      //  Если автовоспроизведение заблокировано, предлагаем пользователю взаимодействовать
+      alert("Для воспроизведения музыки нажмите кнопку еще раз.");
+    });
+    isPlaying = true;
+  } else {
+    audio.pause();
+    isPlaying = false;
+  }
+  togglePlayPauseIcon(); //  Обновляем иконку
+}
+
+//  Обработчик клика на кнопку
+playButton.addEventListener('click', togglePlayPause);
+
+//  Попытка автоматического запуска при загрузке страницы (может быть заблокировано браузером)
+document.addEventListener('DOMContentLoaded', function() {
+  audio.play().catch(function(error) {
+    console.log("Автовоспроизведение при загрузке заблокировано:", error);
+    //  Если автовоспроизведение заблокировано, отображаем иконку "Play"
+    isPlaying = false;
+    togglePlayPauseIcon();
+  });
+});
+
+  audio.volume = 0.5; //  Громкость от 0 (тихо) до 1 (максимально)
+
+
+    </script>
+     
+</body>
+</html>
