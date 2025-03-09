@@ -102,6 +102,26 @@ text-align: center;
   width: 30px; /* Размер иконки */
   height: 30px;
 }
+    #countdown {
+  font-family: 'Arial', sans-serif;
+  font-size: 3em;
+  color: white;
+  position: relative;
+}
+
+/* Глитч-эффект */
+#countdown::before,
+#countdown::after {
+  content: attr(id);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#countdown::before {
+}
 </style>
 <body>
     <audio id="myAudio" src="Безназвания.mp3" autoplay loop></audio>
@@ -112,7 +132,13 @@ text-align: center;
     <div class="container">
         <a href="https://ibb.co/WWvsVysr"><img src="IMG_1295.JPG" alt="Coming Soon Image" class="background-image" border="0"></a>
         <div class="coming-soon">Coming Soon...</div>
-    </div>  
+    </div> 
+    <div class="container">
+  <div class="coming-soon">Coming Soon</div>
+  <div id="countdown" class="glitch">
+    <span id="days"></span>:<span id="hours"></span>:<span id="minutes"></span>:<span id="seconds"></span>
+  </div>
+</div>
     <div class="social-icons">
        <a href="https://www.bandlab.com/stylerz_"><img src="https://i.ibb.co/fzQfSVWb/White-Bandlab-Icon.jpg" alt="White-Bandlab-Icon" border="0"></a>
         <a href="https://t.me/stylerz_archive"><img src="https://i.ibb.co/svKZL8Sm/telegram-1.png" alt="telegram-1" border="0"></a>
